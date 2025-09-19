@@ -11,6 +11,9 @@ const Registration = () => {
     confirmPassword: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   return (
     <div className="flex min-h-screen">
       {/* Background Image */}
@@ -25,7 +28,7 @@ const Registration = () => {
       </div>
 
       {/* Form Section */}
-      <div className="w-1/2 flex flex-col pl-30 pt-20">
+      <div className="w-1/2 flex flex-col  pl-30 mt-48">
         {/* Title */}
         <div className="mb-8">
           <h1 className="font-semibold text-4xl text-[#10151F]">
@@ -34,7 +37,7 @@ const Registration = () => {
         </div>
 
         {/* Form Fields */}
-        <div className="w-[554px] space-y-4">
+        <div className="w-[554px] space-y-4 gap-[4px] flex flex-col ">
           {/* Username */}
           <div>
             <label className="block text-sm font-medium text-[#3E424A] mb-2 rounded-[8px]"></label>
@@ -45,7 +48,7 @@ const Registration = () => {
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, username: e.target.value }))
               }
-              className="w-full px-3 py-3 border border-[#E1DFE1] rounded-lg focus:outline-none focus:ring-2"
+              className="w-full gap-[10px] px-3 py-3 border border-[#E1DFE1] rounded-lg focus:outline-none focus:ring-2"
               placeholder="Username "
             />
           </div>
@@ -70,7 +73,7 @@ const Registration = () => {
             <label className="block text-sm font-medium text-[#3E424A] mb-2"></label>
             <div className="relative">
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 value={formData.password}
                 onChange={(e) =>
@@ -81,9 +84,16 @@ const Registration = () => {
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                onClick={() => setShowPassword(!showPassword)} // Toggle visibility
+                className={`absolute right-3 top-1/2 transform -translate-y-1/2 transition-opacity ${
+                  showPassword ? "opacity-50" : "opacity-100"
+                }`}
               >
-                👁️
+                <img
+                  src="/eye.svg"
+                  alt="Toggle password visibility"
+                  className="cursor-pointer"
+                />
               </button>
             </div>
           </div>
@@ -93,7 +103,7 @@ const Registration = () => {
             <label className="block text-sm font-medium text-[#3E424A] mb-2"></label>
             <div className="relative">
               <input
-                type="password"
+                type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={(e) =>
@@ -107,15 +117,22 @@ const Registration = () => {
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className={`absolute right-3 top-1/2 transfom -translate-y-1/2 transition-opacity ${
+                  showConfirmPassword ? "opacity-50" : "opacity-100"
+                }`}
               >
-                👁️
+                <img
+                  src="/eye.svg"
+                  alt="Toggle password visibility"
+                  className="cursor-pointer"
+                />
               </button>
             </div>
           </div>
 
           {/* Register Button */}
-          <button className="w-full bg-[#FF4000]  text-white rounded-[10px] font-regular py-3 px-4 transition duration-200 mt-6">
+          <button className="w-full bg-[#FF4000]  text-white rounded-[10px] cursor-pointer font-regular py-3 px-4 transition duration-200 mt-6">
             Register
           </button>
 
